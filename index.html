@@ -11,167 +11,47 @@
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
-   
-    <title>Job Search</title>
+    <title>Log In</title>
 </head>
 
 <body>
 
-    <h1 class="center-align" id="lead">Let's Get Paid</h1>
+    <h1 class="center-align">Please sign in to continue to Let's Get Paid</h1>
 
-    <div class="container table-1">
-        <div class="row">
-            
-            <div class="col s6">
-                <div class="form-group">
-                    <label for="keyword">Search Keyword</label>
-                    <input onfocus="this.value=''" type="text" class="form-control" placeholder="search keyword"
-                        id="keyword">
-                </div>
-                <div class="form-group">
-                    <label for="location">Location</label>
-                    <input onfocus="this.value=''" type="text" name="location" class="form-control" id="location"
-                        placeholder="location">
-                </div>
-                <div class="form-group">
-                    <button id="submit" class="btn waves-effect waves-light blue" type="submit" name="action">Submit
-                        <i class="material-icons right">send</i>
-                    </button id="submit">
-                </div>
-            </div>
-            
-            <div class="col s6">
-                <nav>
-                    <div class="nav-wrapper">
-                        <a href="favorites.html" class="brand-logo center">Saved Jobs</a>
-                    </div>
-                </nav>
-            </div>
-        </div>
+    <!--this is the div that displays the Auth widget-->
+    <div id="firebaseui-auth-container"></div>
+    <!--this just a div that says loading until, and then disappears once the widget is ready-->
+    <div id="loader">Loading...</div>
 
-    </div>
 
-    <div class="container table-1">
-        <table class="striped">
-            <thead>
-                <tr>
-                    <th id="h1" class="center-align">USAJobs</th>
-                </tr>
-                <tr id="job-1">
-                    <th>Save Listing</th>
-                    <th>Job Title</th>
-                    <th>Employer</th>
-                    <th>Location</th>
-                    <th class="stopText">Description</th>
-                </tr>
-            </thead>
-            <tbody class="job-info-1">
-                <!-- Results from USAJobs will appear here -->
-            </tbody>
-        </table>
-    </div>
 
-    <div class="container table-2">
-        <table class="striped">
-            <thead>
-                <tr>
-                    <th id="h1" class="center-align">Github jobs</th>
-                </tr>
-                <tr id="job-1">
-                    <th>Save Listing</th>
-                    <th>Job Title</th>
-                    <th>Employer</th>
-                    <th>Location</th>
-                    <th class="stopText">Description</th>
-                </tr>
-            </thead>
-            <tbody class="job-info-2">
-                <!-- Results from Github jobs will appear here -->
-            </tbody>
-        </table>
-    </div>
 
-    <div class="container table-3">
-        <table class="striped">
-            <thead>
-                <tr>
-                    <th id="h1" class="center-align">Job listings</th>
-                </tr>
-                <tr id="job-1">
-                    <th>Save Listing</th>
-                    <th>Job Title</th>
-                    <th>Employer</th>
-                    <th>Location</th>
-                    <th class="stopText">Description</th>
-                </tr>
-            </thead>
-            <tbody class="job-info-3">
-                <!-- Not sure which results will appear here -->
-            </tbody>
-        </table>
-    </div>
 
-    <div class="container table-4">
-        <table class="striped">
-            <thead>
-                <tr>
-                    <th id="h1" class="center-align">Job listings</th>
-                </tr>
-                <tr id="job-1">
-                    <th>Save Listing</th>
-                    <th>Job Title</th>
-                    <th>Employer</th>
-                    <th>Location</th>
-                    <th>Description</th>
-                </tr>
-            </thead>
-            <tbody class="job-info-4">
-                <!-- Not sure which results will appear here -->
-            </tbody>
-        </table>
-    </div>
 
-    <!-- RACHEL TESTING MODAL  -->
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalScrollableTitle">Job Description</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                   
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div><br><br><br>
+
+
+
+
+
+
+
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.js"
-        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
     <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>
     <!-- Add Firebase products that you want to use -->
     <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-database.js"></script>
-    <script src="assets/javascript/app.js"></script>
-    <script src="assets/javascript/ajax.js"></script>
-   
+    <!--Link for the firebase.js page where all the code is-->
+    <script src="assets/javascript/firebase.js"></script>
+
     <footer>
         &#169; Copyright Blue Barracudas
     </footer>
-
 </body>
 
 </html>
