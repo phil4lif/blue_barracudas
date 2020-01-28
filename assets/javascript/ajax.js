@@ -210,7 +210,8 @@ $(document).ready(function () {
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     var database = firebase.database();
-
+    var rootRef = database.ref('users');
+    var user = firebase.auth().currentUser;
     //write the functionality of the save buttons
     //_______________________________________________
     //document click function that will allow the user to click
@@ -222,27 +223,28 @@ $(document).ready(function () {
         //the object will be pushed to firebase on that signed in users path
         e.preventDefault();
         console.log("save")
+        console.log(user)
         var savedJob = {
             title: $(this).attr("data-title"),
             location: $(this).attr("data-loc"),
             company: $(this).attr("data-company"),
             url: $(this).attr("data-url"),
             // savebutton: $(this)
-
         }
+        rootRef.child(user).push(savedJob)
         //these are the attributes that were created when the button was made.
-        database.ref().push(savedJob
+        // database.ref().push(savedJob
             // title: $(this).attr("data-title"),
             // location: $(this).attr("data-loc"),
             // company: $(this).attr("data-company"),
             // url: $(this).attr("data-url"),
             // savebutton: $(this)
-        )
+        // )
     })
     //the saved jobs will then be pulled from firebase to be displayed on the favorites html page
     //use the child added function to take the values from the db
     database.ref().on("child_added", function (snapshot) {
-        console.log(snapshot.val());
+        // console.log(snapshot.val());
         //and store them in new variables
         var eraseButton = $("<button>").text("erase").addClass("btn btn-primary btn-sm erase-button")
         eraseButton.attr("data-title", snapshot.val().title)
