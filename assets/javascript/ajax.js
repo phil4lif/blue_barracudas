@@ -211,7 +211,7 @@ $(document).ready(function () {
     firebase.initializeApp(firebaseConfig);
     var database = firebase.database();
     var rootRef = database.ref('users');
-    var user = firebase.auth().currentUser;
+    var user = firebase.auth().currentUser.displayname;
     //write the functionality of the save buttons
     //_______________________________________________
     //document click function that will allow the user to click
@@ -223,7 +223,7 @@ $(document).ready(function () {
         //the object will be pushed to firebase on that signed in users path
         e.preventDefault();
         console.log("save")
-        console.log(user)
+        console.log(user.value)
         var savedJob = {
             title: $(this).attr("data-title"),
             location: $(this).attr("data-loc"),
@@ -231,7 +231,7 @@ $(document).ready(function () {
             url: $(this).attr("data-url"),
             // savebutton: $(this)
         }
-        rootRef.child(user).push(savedJob)
+        rootRef.child(user.value).push(savedJob)
         //these are the attributes that were created when the button was made.
         // database.ref().push(savedJob
             // title: $(this).attr("data-title"),
