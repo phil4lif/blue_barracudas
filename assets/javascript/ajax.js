@@ -223,7 +223,7 @@ $(document).ready(function () {
         //the object will be pushed to firebase on that signed in users path
         e.preventDefault();
         console.log("save")
-        console.log(user.value)
+        console.log(firebase.auth().currentUser.displayname)
         var savedJob = {
             title: $(this).attr("data-title"),
             location: $(this).attr("data-loc"),
@@ -231,7 +231,7 @@ $(document).ready(function () {
             url: $(this).attr("data-url"),
             // savebutton: $(this)
         }
-        rootRef.child(user.value).push(savedJob)
+        rootRef.child(firebase.auth().currentUser.displayname).push(savedJob)
         //these are the attributes that were created when the button was made.
         // database.ref().push(savedJob
             // title: $(this).attr("data-title"),
