@@ -211,7 +211,13 @@ $(document).ready(function () {
     firebase.initializeApp(firebaseConfig);
     var database = firebase.database();
     var rootRef = database.ref('users');
-    var user = firebase.auth().currentUser.displayName
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            // User is signed in.
+        } else {
+            // No user is signed in.
+        }
+    });
     //write the functionality of the save buttons
     //_______________________________________________
     //document click function that will allow the user to click
@@ -222,7 +228,6 @@ $(document).ready(function () {
     $(document).on("click", ".save-button", function (e) {
         //the object will be pushed to firebase on that signed in users path
         e.preventDefault();
-        console.log(user.value)
         console.log("save")
         // var savedJob = {
         //     title: $(this).attr("data-title"),
@@ -243,8 +248,8 @@ $(document).ready(function () {
 
     //the saved jobs will then be pulled from firebase to be displayed on the favorites html page
     //use the child added function to take the values from the db
-    database.ref().on("child_added", function (snapshot) {
-        // console.log(snapshot.val());
+    rootRef.child(firebase.auth().currentUser.displayName).on("child_added", function (snapshot) {
+        console.log(snapshot.val());
         //and store them in new variables
         var eraseButton = $("<button>").text("erase").addClass("btn btn-primary btn-sm erase-button")
         eraseButton.attr("data-title", snapshot.val().title)
@@ -274,17 +279,17 @@ $(document).ready(function () {
 
     //give functionality to the new buttons in the saved jobs table
     //the erase button will remove the saved job from firebase and from the table at the same time
-    // $(document).on("click", ".erase-button", function () {
-    //     console.log("erase")
-    //     var removeRef = firebase.database().ref();
-    //     removeRef.remove()
-    //         .then(function () {
-    //             console.log("Remove succeeded.")
-    //         })
-    //         .catch(function (error) {
-    //             console.log("Remove failed: " + error.message)
-    //         });
-    // })
+    $(document).on("click", ".erase-button", function () {
+        console.log("erase")
+        var removeRef = firebase.database().ref();
+        removeRef.remove()
+            .then(function () {
+                console.log("Remove succeeded.")
+            })
+            .catch(function (error) {
+                console.log("Remove failed: " + error.message)
+            });
+    })
 
     //the applied for button will move the job to the other table for applied for jobs
 })
